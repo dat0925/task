@@ -69,13 +69,14 @@ const styles = `
     --safe-bottom: env(safe-area-inset-bottom, 0px);
   }
 
-  html { height: 100%; -webkit-text-size-adjust: 100%; }
+  html { height: 100%; height: -webkit-fill-available; -webkit-text-size-adjust: 100%; }
 
   body {
     font-family: var(--font);
     background: var(--bg);
     color: var(--text-primary);
     height: 100%;
+    min-height: -webkit-fill-available;
     overflow: hidden;
     -webkit-font-smoothing: antialiased;
     overscroll-behavior: none;
@@ -88,6 +89,7 @@ const styles = `
   .app {
     display: flex;
     flex-direction: column;
+    height: 100vh;
     height: 100svh;
     max-width: 430px;
     margin: 0 auto;
