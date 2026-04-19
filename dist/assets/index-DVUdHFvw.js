@@ -516,8 +516,180 @@ Error generating stack: `+e.message+`
   .drag-over-above { box-shadow: 0 -2px 0 var(--accent) !important; border-radius: 0 !important; }
   .drag-over-below { box-shadow: 0 2px 0 var(--accent) !important; border-radius: 0 !important; }
 
+  /* ── ACCORDION ── */
+  .accordion {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    margin: 8px 0 2px;
+    overflow: hidden;
+  }
+
+  .accordion-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    gap: 10px;
+  }
+  .accordion-header:active { opacity: 0.7; }
+
+  .accordion-header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .accordion-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .accordion-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .accordion-badge {
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--accent-light);
+    color: var(--accent);
+    padding: 2px 7px;
+    border-radius: 100px;
+    flex-shrink: 0;
+  }
+
+  .accordion-chevron {
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .accordion-chevron.open { transform: rotate(180deg); }
+
+  .accordion-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .accordion-body.open {
+    grid-template-rows: 1fr;
+  }
+  .accordion-inner {
+    overflow: hidden;
+  }
+  .accordion-content {
+    padding: 0 16px 16px;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.05s,
+                transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.05s;
+  }
+  .accordion-body.open .accordion-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── AI SUGGESTION ── */
+  .ai-loading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    padding: 4px 0 8px;
+  }
+
+  .ai-dots {
+    display: flex;
+    gap: 4px;
+  }
+  .ai-dots span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: dotPulse 1.2s ease-in-out infinite;
+  }
+  .ai-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .ai-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes dotPulse {
+    0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+    40% { opacity: 1; transform: scale(1); }
+  }
+
+  .ai-suggestions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ai-suggestion-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    background: var(--surface2);
+    border-radius: var(--radius-sm);
+    padding: 11px 12px;
+  }
+
+  .ai-suggestion-text {
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: var(--text-primary);
+    flex: 1;
+  }
+
+  .ai-add-btn {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    border: none;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s var(--spring);
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  .ai-add-btn:active { transform: scale(0.84); }
+
+  .ai-refresh-btn {
+    width: 100%;
+    margin-top: 10px;
+    background: transparent;
+    border: 1.5px solid var(--separator);
+    border-radius: var(--radius-sm);
+    padding: 9px;
+    font-family: var(--font);
+    font-size: 13px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.18s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .ai-refresh-btn:active { background: var(--surface2); }
+
   /* ── HAPTIC-like feedback ── */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   }
-`,x=()=>(0,f.jsx)(`svg`,{className:`check-icon`,width:`14`,height:`14`,viewBox:`0 0 14 14`,fill:`none`,children:(0,f.jsx)(`path`,{d:`M2.5 7L5.5 10L11.5 4`,stroke:`white`,strokeWidth:`2.2`,strokeLinecap:`round`,strokeLinejoin:`round`})}),ee=()=>(0,f.jsxs)(`svg`,{width:`16`,height:`16`,viewBox:`0 0 16 16`,fill:`none`,children:[(0,f.jsx)(`circle`,{cx:`5`,cy:`4`,r:`1.2`,fill:`currentColor`}),(0,f.jsx)(`circle`,{cx:`11`,cy:`4`,r:`1.2`,fill:`currentColor`}),(0,f.jsx)(`circle`,{cx:`5`,cy:`8`,r:`1.2`,fill:`currentColor`}),(0,f.jsx)(`circle`,{cx:`11`,cy:`8`,r:`1.2`,fill:`currentColor`}),(0,f.jsx)(`circle`,{cx:`5`,cy:`12`,r:`1.2`,fill:`currentColor`}),(0,f.jsx)(`circle`,{cx:`11`,cy:`12`,r:`1.2`,fill:`currentColor`})]}),S=()=>(0,f.jsxs)(`svg`,{width:`11`,height:`11`,viewBox:`0 0 12 12`,fill:`none`,children:[(0,f.jsx)(`rect`,{x:`1`,y:`2`,width:`10`,height:`9`,rx:`1.5`,stroke:`currentColor`,strokeWidth:`1.3`}),(0,f.jsx)(`path`,{d:`M4 1V3M8 1V3M1 5H11`,stroke:`currentColor`,strokeWidth:`1.3`,strokeLinecap:`round`})]}),C=()=>(0,f.jsx)(`svg`,{width:`20`,height:`20`,viewBox:`0 0 24 24`,fill:`none`,children:(0,f.jsx)(`path`,{d:`M3 6H21M8 6V4H16V6M19 6L18.1 19.1C18 20.2 17.1 21 16 21H8C6.9 21 6 20.2 5.9 19.1L5 6`,stroke:`white`,strokeWidth:`2`,strokeLinecap:`round`,strokeLinejoin:`round`})}),te=()=>(0,f.jsx)(`svg`,{width:`22`,height:`22`,viewBox:`0 0 24 24`,fill:`none`,children:(0,f.jsx)(`path`,{d:`M5 12L10 17L19 7`,stroke:`white`,strokeWidth:`2.5`,strokeLinecap:`round`,strokeLinejoin:`round`})}),ne=72;function re({task:e,onToggle:t,onDelete:n,onOpen:r,dragHandleProps:i,isDragging:a}){let o=(0,l.useRef)(null),s=(0,l.useRef)(null),c=(0,l.useRef)(0),u=(0,l.useRef)(null),d=e=>{s.current=e.touches[0].clientX,c.current=0},p=e=>{if(s.current===null)return;let t=e.touches[0].clientX-s.current;c.current=t,!(Math.abs(t)<8)&&(u.current&&cancelAnimationFrame(u.current),u.current=requestAnimationFrame(()=>{if(!o.current)return;let e=Math.max(-ne*1.4,Math.min(ne*1.4,t));o.current.style.transform=`translateX(${e}px)`;let n=o.current.parentElement?.querySelector(`.swipe-bg-check`),r=o.current.parentElement?.querySelector(`.swipe-bg-delete`);n&&n.querySelector(`svg`)?.classList.toggle(`visible`,t>ne*.6),r&&r.querySelector(`svg`)?.classList.toggle(`visible`,t<-ne*.6)}))},m=()=>{if(!o.current)return;let r=c.current;o.current.style.transition=`transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275)`,o.current.style.transform=`translateX(0)`,r>ne?t(e.id):r<-ne&&n(e.id),setTimeout(()=>{o.current&&(o.current.style.transition=``)},350),s.current=null,c.current=0},_=g(e);return(0,f.jsxs)(`div`,{className:`task-row ${a?`dragging`:``}`,style:{transition:a?`none`:void 0},children:[(0,f.jsx)(`div`,{className:`swipe-bg swipe-bg-check`,children:(0,f.jsx)(te,{})}),(0,f.jsx)(`div`,{className:`swipe-bg swipe-bg-delete`,children:(0,f.jsx)(C,{})}),(0,f.jsxs)(`div`,{ref:o,className:`task-card ${e.completed?`completed-card`:``}`,onTouchStart:d,onTouchMove:p,onTouchEnd:m,onClick:()=>r(e),children:[(0,f.jsx)(`button`,{className:`check-btn ${e.completed?`checked`:``}`,onClick:n=>{n.stopPropagation(),t(e.id)},children:(0,f.jsx)(x,{})}),(0,f.jsxs)(`div`,{className:`task-body`,children:[(0,f.jsx)(`div`,{className:`task-title ${e.completed?`done-text`:``}`,children:e.title}),(0,f.jsx)(`div`,{className:`task-meta`,children:(()=>{if(e.completed&&e.completedDate)return(0,f.jsxs)(`span`,{className:`date-badge`,children:[`✓ `,h(e.completedDate)]});let t=[];if(e.startDate&&t.push(h(e.startDate)),e.endDate){let n=e.startDate?`→ ${h(e.endDate)}`:h(e.endDate),r=`date-badge ${_===`overdue`?`overdue`:_===`today`?`today-due`:_===`soon`?`soon-due`:``}`;t.push((0,f.jsxs)(`span`,{className:r,children:[_===`overdue`?`⚠ `:``,n]},`end`))}return t.length===0?null:t.map((e,t)=>(0,f.jsxs)(`span`,{style:{display:`flex`,alignItems:`center`,gap:3},children:[(0,f.jsx)(S,{}),e]},t))})()})]}),(0,f.jsx)(`div`,{className:`drag-handle`,...i,onClick:e=>e.stopPropagation(),children:(0,f.jsx)(ee,{})})]})]})}function w({task:e,onSave:t,onClose:n,onDelete:r}){let[i,a]=(0,l.useState)(e?.title||``),[o,s]=(0,l.useState)(e?.startDate||``),[c,u]=(0,l.useState)(e?.endDate||``),[d,p]=(0,l.useState)(!1),m=(0,l.useRef)(null);(0,l.useEffect)(()=>{setTimeout(()=>m.current?.focus(),300)},[]);let h=()=>{p(!0),setTimeout(n,220)},g=()=>{i.trim()&&(t({title:i.trim(),startDate:o,endDate:c}),h())},_=()=>{r(e.id),h()},v=!!e;return(0,f.jsx)(`div`,{className:`modal-backdrop ${d?`closing`:``}`,onClick:h,children:(0,f.jsxs)(`div`,{className:`modal-sheet ${d?`closing`:``}`,onClick:e=>e.stopPropagation(),children:[(0,f.jsx)(`div`,{className:`sheet-handle`}),(0,f.jsx)(`div`,{className:`sheet-title`,children:v?`タスクを編集`:`新しいタスク`}),(0,f.jsxs)(`div`,{className:`field-group`,children:[(0,f.jsxs)(`div`,{children:[(0,f.jsx)(`div`,{className:`field-label`,children:`タイトル`}),(0,f.jsx)(`textarea`,{ref:m,className:`task-input`,rows:2,placeholder:`タスクを入力...`,value:i,onChange:e=>a(e.target.value),onKeyDown:e=>{e.key===`Enter`&&!e.shiftKey&&(e.preventDefault(),g())}})]}),(0,f.jsxs)(`div`,{children:[(0,f.jsx)(`div`,{className:`field-label`,children:`期間`}),(0,f.jsxs)(`div`,{className:`date-row`,children:[(0,f.jsx)(`div`,{className:`date-field`,children:(0,f.jsx)(`input`,{type:`date`,className:`date-input`,value:o,onChange:e=>s(e.target.value),placeholder:`開始日`})}),(0,f.jsx)(`div`,{className:`date-field`,children:(0,f.jsx)(`input`,{type:`date`,className:`date-input`,value:c,onChange:e=>u(e.target.value),placeholder:`終了日`,min:o})})]})]})]}),(0,f.jsxs)(`div`,{className:`btn-row`,children:[v?(0,f.jsx)(`button`,{className:`btn btn-danger`,onClick:_,children:`削除`}):(0,f.jsx)(`button`,{className:`btn btn-ghost`,onClick:h,children:`キャンセル`}),(0,f.jsx)(`button`,{className:`btn btn-primary`,onClick:g,disabled:!i.trim(),style:{opacity:i.trim()?1:.5},children:v?`保存`:`追加`})]})]})})}function ie({task:e,onEdit:t,onClose:n,onToggle:r}){let[i,a]=(0,l.useState)(!1),o=()=>{a(!0),setTimeout(n,220)},s=g(e),c=s===`overdue`?`overdue`:s===`today`?`today-due`:s===`soon`?`soon-due`:``;return(0,f.jsx)(`div`,{className:`modal-backdrop ${i?`closing`:``}`,onClick:o,children:(0,f.jsxs)(`div`,{className:`modal-sheet ${i?`closing`:``}`,onClick:e=>e.stopPropagation(),children:[(0,f.jsx)(`div`,{className:`sheet-handle`}),(0,f.jsx)(`div`,{className:`detail-title ${e.completed?`done-text`:``}`,children:e.title}),e.startDate&&(0,f.jsxs)(`div`,{className:`detail-row`,children:[(0,f.jsx)(`span`,{className:`detail-label`,children:`開始日`}),(0,f.jsx)(`span`,{className:`detail-value`,children:e.startDate})]}),e.endDate&&(0,f.jsxs)(`div`,{className:`detail-row`,children:[(0,f.jsx)(`span`,{className:`detail-label`,children:`終了日`}),(0,f.jsxs)(`span`,{className:`detail-value date-badge ${c}`,children:[s===`overdue`?`⚠ 期限切れ `:``,e.endDate]})]}),e.completedDate&&(0,f.jsxs)(`div`,{className:`detail-row`,children:[(0,f.jsx)(`span`,{className:`detail-label`,children:`完了日`}),(0,f.jsxs)(`span`,{className:`detail-value`,style:{color:`var(--green)`},children:[`✓ `,e.completedDate]})]}),(0,f.jsxs)(`div`,{className:`detail-row`,children:[(0,f.jsx)(`span`,{className:`detail-label`,children:`追加日`}),(0,f.jsx)(`span`,{className:`detail-value`,children:e.createdAt})]}),(0,f.jsxs)(`div`,{className:`action-btn-row`,children:[(0,f.jsx)(`button`,{className:`btn btn-ghost`,onClick:()=>{r(e.id),o()},children:e.completed?`未完了に戻す`:`完了にする`}),(0,f.jsx)(`button`,{className:`btn btn-primary`,onClick:()=>{o(),setTimeout(()=>t(e),250)},children:`編集`})]})]})})}function ae(e,t){let n=(0,l.useRef)(null),r=(0,l.useRef)(null),i=(0,l.useRef)(0);return(0,l.useRef)(0),(0,l.useRef)(null),{onHandleTouchStart:(0,l.useCallback)((e,t)=>{e.stopPropagation(),r.current=t,i.current=e.touches[0].clientY;let a=e.currentTarget.closest(`.task-row`);if(!a)return;let o=a.getBoundingClientRect();n.current=a.cloneNode(!0),Object.assign(n.current.style,{position:`fixed`,top:o.top+`px`,left:o.left+`px`,width:o.width+`px`,zIndex:999,pointerEvents:`none`,opacity:`0.92`,boxShadow:`0 12px 40px rgba(0,0,0,0.18)`,transition:`none`,borderRadius:`14px`}),document.body.appendChild(n.current),a.style.opacity=`0.3`},[]),onHandleTouchMove:(0,l.useCallback)(e=>{if(!r.current||!n.current)return;let t=e.touches[0].clientY-i.current,a=parseFloat(n.current.style.top)+t;n.current.style.top=a+`px`,i.current=e.touches[0].clientY;let o=document.querySelectorAll(`.task-row`);o.forEach(e=>e.classList.remove(`drag-over-above`,`drag-over-below`));let s=e.touches[0].clientY,c=null,l=1/0;if(o.forEach(e=>{let t=e.getBoundingClientRect(),n=t.top+t.height/2,r=Math.abs(s-n);r<l&&(l=r,c=e)}),c){let e=c.getBoundingClientRect(),t=e.top+e.height/2;c.classList.add(s<t?`drag-over-above`:`drag-over-below`)}},[]),onHandleTouchEnd:(0,l.useCallback)(e=>{if(!r.current)return;let i=document.querySelectorAll(`.task-row`),a=null,o=!0;i.forEach(e=>{e.classList.contains(`drag-over-above`)&&(a=e.dataset.id,o=!0),e.classList.contains(`drag-over-below`)&&(a=e.dataset.id,o=!1),e.classList.remove(`drag-over-above`,`drag-over-below`),e.style.opacity=``}),a&&a!==r.current&&t(e=>{let t=[...e],n=t.findIndex(e=>e.id===r.current),i=t.findIndex(e=>e.id===a);if(n===-1||i===-1)return e;let[s]=t.splice(n,1);return i=t.findIndex(e=>e.id===a),t.splice(o?i:i+1,0,s),t}),n.current&&=(n.current.remove(),null),r.current=null},[t])}}var oe=[{key:`all`,label:`すべて`},{key:`active`,label:`未完了`},{key:`today`,label:`今日`},{key:`done`,label:`完了`}];function se(){let[e,t]=(0,l.useState)(v),[n,r]=(0,l.useState)(`all`),[i,a]=(0,l.useState)(null),[o,s]=(0,l.useState)(null);(0,l.useEffect)(()=>{y(e)},[e]);let{onHandleTouchStart:c,onHandleTouchMove:u,onHandleTouchEnd:d}=ae(e,t),h=e.filter(e=>{if(n===`all`)return!0;if(n===`active`)return!e.completed;if(n===`done`)return e.completed;if(n===`today`){let t=m();return!e.completed&&(e.endDate===t||e.startDate===t)}return!0}),g=h.filter(e=>!e.completed),_=h.filter(e=>e.completed),x=e=>{let n={id:p(),title:e.title,startDate:e.startDate,endDate:e.endDate,completed:!1,completedDate:null,createdAt:m()};t(e=>[n,...e])},ee=e=>{t(t=>t.map(t=>t.id===i.id?{...t,...e}:t))},S=e=>{t(t=>t.map(t=>t.id===e?{...t,completed:!t.completed,completedDate:t.completed?null:m()}:t))},C=e=>{t(t=>t.filter(t=>t.id!==e))},te=e.filter(e=>!e.completed).length;return(0,f.jsxs)(f.Fragment,{children:[(0,f.jsx)(`style`,{children:b}),(0,f.jsxs)(`div`,{className:`app`,onTouchMove:u,onTouchEnd:d,children:[(0,f.jsxs)(`div`,{className:`header`,children:[(0,f.jsxs)(`div`,{className:`header-top`,children:[(0,f.jsx)(`div`,{className:`header-title`,children:`タスク`}),(0,f.jsx)(`div`,{className:`header-count`,children:te>0?`${te}件`:`完了 🎉`})]}),(0,f.jsx)(`div`,{className:`filter-bar`,children:oe.map(e=>(0,f.jsx)(`button`,{className:`filter-chip ${n===e.key?`active`:``}`,onClick:()=>r(e.key),children:e.label},e.key))})]}),(0,f.jsx)(`div`,{className:`task-list-wrap`,children:(0,f.jsxs)(`div`,{className:`task-list`,children:[g.length===0&&_.length===0&&(0,f.jsxs)(`div`,{className:`empty-state`,children:[(0,f.jsx)(`div`,{className:`empty-icon`,children:`✅`}),(0,f.jsx)(`div`,{className:`empty-text`,children:`タスクがありません`}),(0,f.jsx)(`div`,{className:`empty-sub`,children:`＋ボタンで追加してみましょう`})]}),g.map(e=>(0,f.jsx)(`div`,{"data-id":e.id,className:`task-enter`,children:(0,f.jsx)(re,{task:e,onToggle:S,onDelete:C,onOpen:e=>s(e),dragHandleProps:{onTouchStart:t=>c(t,e.id)}})},e.id)),_.length>0&&(0,f.jsxs)(f.Fragment,{children:[(0,f.jsxs)(`div`,{className:`section-label`,children:[`完了済み — `,_.length,`件`]}),_.map(e=>(0,f.jsx)(`div`,{"data-id":e.id,children:(0,f.jsx)(re,{task:e,onToggle:S,onDelete:C,onOpen:e=>s(e),dragHandleProps:{onTouchStart:t=>c(t,e.id)}})},e.id))]})]})}),(0,f.jsx)(`div`,{className:`fab-wrap`,children:(0,f.jsx)(`button`,{className:`fab`,onClick:()=>a(`add`),children:`＋`})})]}),i===`add`&&(0,f.jsx)(w,{onSave:x,onClose:()=>a(null),onDelete:()=>{}}),i&&i!==`add`&&(0,f.jsx)(w,{task:i,onSave:ee,onClose:()=>a(null),onDelete:C}),o&&(0,f.jsx)(ie,{task:o,onClose:()=>s(null),onToggle:S,onEdit:e=>{s(null),setTimeout(()=>a(e),260)}})]})}(0,u.createRoot)(document.getElementById(`root`)).render((0,f.jsx)(l.StrictMode,{children:(0,f.jsx)(se,{})}));
+`,x=()=>(0,f.jsx)(`svg`,{className:`check-icon`,width:`14`,height:`14`,viewBox:`0 0 14 14`,fill:`none`,children:(0,f.jsx)(`path`,{d:`M2.5 7L5.5 10L11.5 4`,stroke:`white`,strokeWidth:`2.2`,strokeLinecap:`round`,strokeLinejoin:`round`})}),ee=()=>(0,f.jsxs)(`svg`,{width:`16`,height:`16`,viewBox:`0 0 16 16`,fill:`none`,children:[(0,f.jsx)(`circle`,{cx:`5`,cy:`4`,r:`1.2`,fill:`currentColor`}),(0,f.jsx)(`circle`,{cx:`11`,cy:`4`,r:`1.2`,fill:`currentColor`}),(0,f.jsx)(`circle`,{cx:`5`,cy:`8`,r:`1.2`,fill:`currentColor`}),(0,f.jsx)(`circle`,{cx:`11`,cy:`8`,r:`1.2`,fill:`currentColor`}),(0,f.jsx)(`circle`,{cx:`5`,cy:`12`,r:`1.2`,fill:`currentColor`}),(0,f.jsx)(`circle`,{cx:`11`,cy:`12`,r:`1.2`,fill:`currentColor`})]}),S=()=>(0,f.jsxs)(`svg`,{width:`11`,height:`11`,viewBox:`0 0 12 12`,fill:`none`,children:[(0,f.jsx)(`rect`,{x:`1`,y:`2`,width:`10`,height:`9`,rx:`1.5`,stroke:`currentColor`,strokeWidth:`1.3`}),(0,f.jsx)(`path`,{d:`M4 1V3M8 1V3M1 5H11`,stroke:`currentColor`,strokeWidth:`1.3`,strokeLinecap:`round`})]}),C=()=>(0,f.jsx)(`svg`,{width:`20`,height:`20`,viewBox:`0 0 24 24`,fill:`none`,children:(0,f.jsx)(`path`,{d:`M3 6H21M8 6V4H16V6M19 6L18.1 19.1C18 20.2 17.1 21 16 21H8C6.9 21 6 20.2 5.9 19.1L5 6`,stroke:`white`,strokeWidth:`2`,strokeLinecap:`round`,strokeLinejoin:`round`})}),te=()=>(0,f.jsx)(`svg`,{width:`22`,height:`22`,viewBox:`0 0 24 24`,fill:`none`,children:(0,f.jsx)(`path`,{d:`M5 12L10 17L19 7`,stroke:`white`,strokeWidth:`2.5`,strokeLinecap:`round`,strokeLinejoin:`round`})}),ne=72;function re({task:e,onToggle:t,onDelete:n,onOpen:r,dragHandleProps:i,isDragging:a}){let o=(0,l.useRef)(null),s=(0,l.useRef)(null),c=(0,l.useRef)(0),u=(0,l.useRef)(null),d=e=>{s.current=e.touches[0].clientX,c.current=0},p=e=>{if(s.current===null)return;let t=e.touches[0].clientX-s.current;c.current=t,!(Math.abs(t)<8)&&(u.current&&cancelAnimationFrame(u.current),u.current=requestAnimationFrame(()=>{if(!o.current)return;let e=Math.max(-ne*1.4,Math.min(ne*1.4,t));o.current.style.transform=`translateX(${e}px)`;let n=o.current.parentElement?.querySelector(`.swipe-bg-check`),r=o.current.parentElement?.querySelector(`.swipe-bg-delete`);n&&n.querySelector(`svg`)?.classList.toggle(`visible`,t>ne*.6),r&&r.querySelector(`svg`)?.classList.toggle(`visible`,t<-ne*.6)}))},m=()=>{if(!o.current)return;let r=c.current;o.current.style.transition=`transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275)`,o.current.style.transform=`translateX(0)`,r>ne?t(e.id):r<-ne&&n(e.id),setTimeout(()=>{o.current&&(o.current.style.transition=``)},350),s.current=null,c.current=0},_=g(e);return(0,f.jsxs)(`div`,{className:`task-row ${a?`dragging`:``}`,style:{transition:a?`none`:void 0},children:[(0,f.jsx)(`div`,{className:`swipe-bg swipe-bg-check`,children:(0,f.jsx)(te,{})}),(0,f.jsx)(`div`,{className:`swipe-bg swipe-bg-delete`,children:(0,f.jsx)(C,{})}),(0,f.jsxs)(`div`,{ref:o,className:`task-card ${e.completed?`completed-card`:``}`,onTouchStart:d,onTouchMove:p,onTouchEnd:m,onClick:()=>r(e),children:[(0,f.jsx)(`button`,{className:`check-btn ${e.completed?`checked`:``}`,onClick:n=>{n.stopPropagation(),t(e.id)},children:(0,f.jsx)(x,{})}),(0,f.jsxs)(`div`,{className:`task-body`,children:[(0,f.jsx)(`div`,{className:`task-title ${e.completed?`done-text`:``}`,children:e.title}),(0,f.jsx)(`div`,{className:`task-meta`,children:(()=>{if(e.completed&&e.completedDate)return(0,f.jsxs)(`span`,{className:`date-badge`,children:[`✓ `,h(e.completedDate)]});let t=[];if(e.startDate&&t.push(h(e.startDate)),e.endDate){let n=e.startDate?`→ ${h(e.endDate)}`:h(e.endDate),r=`date-badge ${_===`overdue`?`overdue`:_===`today`?`today-due`:_===`soon`?`soon-due`:``}`;t.push((0,f.jsxs)(`span`,{className:r,children:[_===`overdue`?`⚠ `:``,n]},`end`))}return t.length===0?null:t.map((e,t)=>(0,f.jsxs)(`span`,{style:{display:`flex`,alignItems:`center`,gap:3},children:[(0,f.jsx)(S,{}),e]},t))})()})]}),(0,f.jsx)(`div`,{className:`drag-handle`,...i,onClick:e=>e.stopPropagation(),children:(0,f.jsx)(ee,{})})]})]})}function w({task:e,onSave:t,onClose:n,onDelete:r}){let[i,a]=(0,l.useState)(e?.title||``),[o,s]=(0,l.useState)(e?.startDate||``),[c,u]=(0,l.useState)(e?.endDate||``),[d,p]=(0,l.useState)(!1),m=(0,l.useRef)(null);(0,l.useEffect)(()=>{setTimeout(()=>m.current?.focus(),300)},[]);let h=()=>{p(!0),setTimeout(n,220)},g=()=>{i.trim()&&(t({title:i.trim(),startDate:o,endDate:c}),h())},_=()=>{r(e.id),h()},v=!!e;return(0,f.jsx)(`div`,{className:`modal-backdrop ${d?`closing`:``}`,onClick:h,children:(0,f.jsxs)(`div`,{className:`modal-sheet ${d?`closing`:``}`,onClick:e=>e.stopPropagation(),children:[(0,f.jsx)(`div`,{className:`sheet-handle`}),(0,f.jsx)(`div`,{className:`sheet-title`,children:v?`タスクを編集`:`新しいタスク`}),(0,f.jsxs)(`div`,{className:`field-group`,children:[(0,f.jsxs)(`div`,{children:[(0,f.jsx)(`div`,{className:`field-label`,children:`タイトル`}),(0,f.jsx)(`textarea`,{ref:m,className:`task-input`,rows:2,placeholder:`タスクを入力...`,value:i,onChange:e=>a(e.target.value),onKeyDown:e=>{e.key===`Enter`&&!e.shiftKey&&(e.preventDefault(),g())}})]}),(0,f.jsxs)(`div`,{children:[(0,f.jsx)(`div`,{className:`field-label`,children:`期間`}),(0,f.jsxs)(`div`,{className:`date-row`,children:[(0,f.jsx)(`div`,{className:`date-field`,children:(0,f.jsx)(`input`,{type:`date`,className:`date-input`,value:o,onChange:e=>s(e.target.value),placeholder:`開始日`})}),(0,f.jsx)(`div`,{className:`date-field`,children:(0,f.jsx)(`input`,{type:`date`,className:`date-input`,value:c,onChange:e=>u(e.target.value),placeholder:`終了日`,min:o})})]})]})]}),(0,f.jsxs)(`div`,{className:`btn-row`,children:[v?(0,f.jsx)(`button`,{className:`btn btn-danger`,onClick:_,children:`削除`}):(0,f.jsx)(`button`,{className:`btn btn-ghost`,onClick:h,children:`キャンセル`}),(0,f.jsx)(`button`,{className:`btn btn-primary`,onClick:g,disabled:!i.trim(),style:{opacity:i.trim()?1:.5},children:v?`保存`:`追加`})]})]})})}function ie({task:e,onEdit:t,onClose:n,onToggle:r}){let[i,a]=(0,l.useState)(!1),o=()=>{a(!0),setTimeout(n,220)},s=g(e),c=s===`overdue`?`overdue`:s===`today`?`today-due`:s===`soon`?`soon-due`:``;return(0,f.jsx)(`div`,{className:`modal-backdrop ${i?`closing`:``}`,onClick:o,children:(0,f.jsxs)(`div`,{className:`modal-sheet ${i?`closing`:``}`,onClick:e=>e.stopPropagation(),children:[(0,f.jsx)(`div`,{className:`sheet-handle`}),(0,f.jsx)(`div`,{className:`detail-title ${e.completed?`done-text`:``}`,children:e.title}),e.startDate&&(0,f.jsxs)(`div`,{className:`detail-row`,children:[(0,f.jsx)(`span`,{className:`detail-label`,children:`開始日`}),(0,f.jsx)(`span`,{className:`detail-value`,children:e.startDate})]}),e.endDate&&(0,f.jsxs)(`div`,{className:`detail-row`,children:[(0,f.jsx)(`span`,{className:`detail-label`,children:`終了日`}),(0,f.jsxs)(`span`,{className:`detail-value date-badge ${c}`,children:[s===`overdue`?`⚠ 期限切れ `:``,e.endDate]})]}),e.completedDate&&(0,f.jsxs)(`div`,{className:`detail-row`,children:[(0,f.jsx)(`span`,{className:`detail-label`,children:`完了日`}),(0,f.jsxs)(`span`,{className:`detail-value`,style:{color:`var(--green)`},children:[`✓ `,e.completedDate]})]}),(0,f.jsxs)(`div`,{className:`detail-row`,children:[(0,f.jsx)(`span`,{className:`detail-label`,children:`追加日`}),(0,f.jsx)(`span`,{className:`detail-value`,children:e.createdAt})]}),(0,f.jsxs)(`div`,{className:`action-btn-row`,children:[(0,f.jsx)(`button`,{className:`btn btn-ghost`,onClick:()=>{r(e.id),o()},children:e.completed?`未完了に戻す`:`完了にする`}),(0,f.jsx)(`button`,{className:`btn btn-primary`,onClick:()=>{o(),setTimeout(()=>t(e),250)},children:`編集`})]})]})})}function ae(e,t){let n=(0,l.useRef)(null),r=(0,l.useRef)(null),i=(0,l.useRef)(0);return(0,l.useRef)(0),(0,l.useRef)(null),{onHandleTouchStart:(0,l.useCallback)((e,t)=>{e.stopPropagation(),r.current=t,i.current=e.touches[0].clientY;let a=e.currentTarget.closest(`.task-row`);if(!a)return;let o=a.getBoundingClientRect();n.current=a.cloneNode(!0),Object.assign(n.current.style,{position:`fixed`,top:o.top+`px`,left:o.left+`px`,width:o.width+`px`,zIndex:999,pointerEvents:`none`,opacity:`0.92`,boxShadow:`0 12px 40px rgba(0,0,0,0.18)`,transition:`none`,borderRadius:`14px`}),document.body.appendChild(n.current),a.style.opacity=`0.3`},[]),onHandleTouchMove:(0,l.useCallback)(e=>{if(!r.current||!n.current)return;let t=e.touches[0].clientY-i.current,a=parseFloat(n.current.style.top)+t;n.current.style.top=a+`px`,i.current=e.touches[0].clientY;let o=document.querySelectorAll(`.task-row`);o.forEach(e=>e.classList.remove(`drag-over-above`,`drag-over-below`));let s=e.touches[0].clientY,c=null,l=1/0;if(o.forEach(e=>{let t=e.getBoundingClientRect(),n=t.top+t.height/2,r=Math.abs(s-n);r<l&&(l=r,c=e)}),c){let e=c.getBoundingClientRect(),t=e.top+e.height/2;c.classList.add(s<t?`drag-over-above`:`drag-over-below`)}},[]),onHandleTouchEnd:(0,l.useCallback)(e=>{if(!r.current)return;let i=document.querySelectorAll(`.task-row`),a=null,o=!0;i.forEach(e=>{e.classList.contains(`drag-over-above`)&&(a=e.dataset.id,o=!0),e.classList.contains(`drag-over-below`)&&(a=e.dataset.id,o=!1),e.classList.remove(`drag-over-above`,`drag-over-below`),e.style.opacity=``}),a&&a!==r.current&&t(e=>{let t=[...e],n=t.findIndex(e=>e.id===r.current),i=t.findIndex(e=>e.id===a);if(n===-1||i===-1)return e;let[s]=t.splice(n,1);return i=t.findIndex(e=>e.id===a),t.splice(o?i:i+1,0,s),t}),n.current&&=(n.current.remove(),null),r.current=null},[t])}}function oe({icon:e,title:t,badge:n,children:r,defaultOpen:i=!1}){let[a,o]=(0,l.useState)(i);return(0,f.jsxs)(`div`,{className:`accordion`,children:[(0,f.jsxs)(`div`,{className:`accordion-header`,onClick:()=>o(e=>!e),children:[(0,f.jsxs)(`div`,{className:`accordion-header-left`,children:[(0,f.jsx)(`span`,{className:`accordion-icon`,children:e}),(0,f.jsx)(`span`,{className:`accordion-title`,children:t}),n!=null&&(0,f.jsx)(`span`,{className:`accordion-badge`,children:n})]}),(0,f.jsx)(`svg`,{className:`accordion-chevron ${a?`open`:``}`,width:`16`,height:`16`,viewBox:`0 0 16 16`,fill:`none`,children:(0,f.jsx)(`path`,{d:`M4 6L8 10L12 6`,stroke:`currentColor`,strokeWidth:`1.8`,strokeLinecap:`round`,strokeLinejoin:`round`})})]}),(0,f.jsx)(`div`,{className:`accordion-body ${a?`open`:``}`,children:(0,f.jsx)(`div`,{className:`accordion-inner`,children:(0,f.jsx)(`div`,{className:`accordion-content`,children:r})})})]})}function se({tasks:e,onAddTask:t}){let[n,r]=(0,l.useState)([]),[i,a]=(0,l.useState)(!1),[o,s]=(0,l.useState)(null),c=(0,l.useCallback)(async()=>{a(!0),s(null),r([]);try{let t=e.filter(e=>!e.completed).slice(0,10).map(e=>`・${e.title}${e.endDate?`（期限: ${e.endDate}）`:``}`).join(`
+`)||`タスクなし`,n=(await(await fetch(`https://api.anthropic.com/v1/messages`,{method:`POST`,headers:{"Content-Type":`application/json`},body:JSON.stringify({model:`claude-sonnet-4-20250514`,max_tokens:1e3,system:`あなたはタスク管理のアシスタントです。ユーザーの現在のタスクリストを見て、追加すると良さそうなタスクを3件提案してください。
+以下のJSON形式のみで返答してください（マークダウン不要）：
+{"suggestions": ["タスク名1", "タスク名2", "タスク名3"]}
+・各タスクは15文字以内で簡潔に
+・現在のタスクと重複しない
+・実用的で具体的な内容`,messages:[{role:`user`,content:`現在のタスク:\n${t}\n\n追加すべきタスクを3件提案してください。`}]})})).json()).content?.find(e=>e.type===`text`)?.text||`{}`;r(JSON.parse(n.replace(/```json|```/g,``).trim()).suggestions||[])}catch{s(`提案の取得に失敗しました`)}finally{a(!1)}},[e]);return(0,l.useEffect)(()=>{c()},[]),(0,f.jsxs)(`div`,{className:`ai-suggestions`,children:[i&&(0,f.jsxs)(`div`,{className:`ai-loading`,children:[(0,f.jsxs)(`div`,{className:`ai-dots`,children:[(0,f.jsx)(`span`,{}),(0,f.jsx)(`span`,{}),(0,f.jsx)(`span`,{})]}),`AIが提案を考えています...`]}),o&&(0,f.jsx)(`div`,{style:{fontSize:13,color:`var(--red)`},children:o}),n.map((e,n)=>(0,f.jsxs)(`div`,{className:`ai-suggestion-item`,children:[(0,f.jsx)(`span`,{className:`ai-suggestion-text`,children:e}),(0,f.jsx)(`button`,{className:`ai-add-btn`,onClick:()=>t(e),title:`タスクに追加`,children:`＋`})]},n)),!i&&(0,f.jsx)(`button`,{className:`ai-refresh-btn`,onClick:c,children:`🔄 再提案`})]})}var ce=[{key:`all`,label:`すべて`},{key:`active`,label:`未完了`},{key:`today`,label:`今日`},{key:`done`,label:`完了`}];function le(){let[e,t]=(0,l.useState)(v),[n,r]=(0,l.useState)(`all`),[i,a]=(0,l.useState)(null),[o,s]=(0,l.useState)(null);(0,l.useEffect)(()=>{y(e)},[e]);let{onHandleTouchStart:c,onHandleTouchMove:u,onHandleTouchEnd:d}=ae(e,t),h=e.filter(e=>{if(n===`all`)return!0;if(n===`active`)return!e.completed;if(n===`done`)return e.completed;if(n===`today`){let t=m();return!e.completed&&(e.endDate===t||e.startDate===t)}return!0}),g=h.filter(e=>!e.completed),_=h.filter(e=>e.completed),x=e=>{let n={id:p(),title:e.title,startDate:e.startDate,endDate:e.endDate,completed:!1,completedDate:null,createdAt:m()};t(e=>[n,...e])},ee=e=>{let n={id:p(),title:e,startDate:``,endDate:``,completed:!1,completedDate:null,createdAt:m()};t(e=>[n,...e])},S=e=>{t(t=>t.map(t=>t.id===i.id?{...t,...e}:t))},C=e=>{t(t=>t.map(t=>t.id===e?{...t,completed:!t.completed,completedDate:t.completed?null:m()}:t))},te=e=>{t(t=>t.filter(t=>t.id!==e))},ne=e.filter(e=>!e.completed).length;return(0,f.jsxs)(f.Fragment,{children:[(0,f.jsx)(`style`,{children:b}),(0,f.jsxs)(`div`,{className:`app`,onTouchMove:u,onTouchEnd:d,children:[(0,f.jsxs)(`div`,{className:`header`,children:[(0,f.jsxs)(`div`,{className:`header-top`,children:[(0,f.jsx)(`div`,{className:`header-title`,children:`タスク`}),(0,f.jsx)(`div`,{className:`header-count`,children:ne>0?`${ne}件`:`完了 🎉`})]}),(0,f.jsx)(`div`,{className:`filter-bar`,children:ce.map(e=>(0,f.jsx)(`button`,{className:`filter-chip ${n===e.key?`active`:``}`,onClick:()=>r(e.key),children:e.label},e.key))})]}),(0,f.jsx)(`div`,{className:`task-list-wrap`,children:(0,f.jsxs)(`div`,{className:`task-list`,children:[g.length===0&&_.length===0&&(0,f.jsxs)(`div`,{className:`empty-state`,children:[(0,f.jsx)(`div`,{className:`empty-icon`,children:`✅`}),(0,f.jsx)(`div`,{className:`empty-text`,children:`タスクがありません`}),(0,f.jsx)(`div`,{className:`empty-sub`,children:`＋ボタンで追加してみましょう`})]}),g.map(e=>(0,f.jsx)(`div`,{"data-id":e.id,className:`task-enter`,children:(0,f.jsx)(re,{task:e,onToggle:C,onDelete:te,onOpen:e=>s(e),dragHandleProps:{onTouchStart:t=>c(t,e.id)}})},e.id)),_.length>0&&(0,f.jsxs)(f.Fragment,{children:[(0,f.jsxs)(`div`,{className:`section-label`,children:[`完了済み — `,_.length,`件`]}),_.map(e=>(0,f.jsx)(`div`,{"data-id":e.id,children:(0,f.jsx)(re,{task:e,onToggle:C,onDelete:te,onOpen:e=>s(e),dragHandleProps:{onTouchStart:t=>c(t,e.id)}})},e.id))]})]})}),(0,f.jsx)(`div`,{style:{padding:`0 16px 8px`},children:(0,f.jsx)(oe,{icon:`✨`,title:`AIタスク提案`,badge:`NEW`,children:(0,f.jsx)(se,{tasks:e,onAddTask:ee})})}),(0,f.jsx)(`div`,{className:`fab-wrap`,children:(0,f.jsx)(`button`,{className:`fab`,onClick:()=>a(`add`),children:`＋`})})]}),i===`add`&&(0,f.jsx)(w,{onSave:x,onClose:()=>a(null),onDelete:()=>{}}),i&&i!==`add`&&(0,f.jsx)(w,{task:i,onSave:S,onClose:()=>a(null),onDelete:te}),o&&(0,f.jsx)(ie,{task:o,onClose:()=>s(null),onToggle:C,onEdit:e=>{s(null),setTimeout(()=>a(e),260)}})]})}(0,u.createRoot)(document.getElementById(`root`)).render((0,f.jsx)(l.StrictMode,{children:(0,f.jsx)(le,{})}));

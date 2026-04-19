@@ -549,6 +549,172 @@ const styles = `
   .drag-over-above { box-shadow: 0 -2px 0 var(--accent) !important; border-radius: 0 !important; }
   .drag-over-below { box-shadow: 0 2px 0 var(--accent) !important; border-radius: 0 !important; }
 
+  /* ── ACCORDION ── */
+  .accordion {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    margin: 8px 0 2px;
+    overflow: hidden;
+  }
+
+  .accordion-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    gap: 10px;
+  }
+  .accordion-header:active { opacity: 0.7; }
+
+  .accordion-header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .accordion-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .accordion-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .accordion-badge {
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--accent-light);
+    color: var(--accent);
+    padding: 2px 7px;
+    border-radius: 100px;
+    flex-shrink: 0;
+  }
+
+  .accordion-chevron {
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .accordion-chevron.open { transform: rotate(180deg); }
+
+  .accordion-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .accordion-body.open {
+    grid-template-rows: 1fr;
+  }
+  .accordion-inner {
+    overflow: hidden;
+  }
+  .accordion-content {
+    padding: 0 16px 16px;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.05s,
+                transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.05s;
+  }
+  .accordion-body.open .accordion-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── AI SUGGESTION ── */
+  .ai-loading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    padding: 4px 0 8px;
+  }
+
+  .ai-dots {
+    display: flex;
+    gap: 4px;
+  }
+  .ai-dots span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: dotPulse 1.2s ease-in-out infinite;
+  }
+  .ai-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .ai-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes dotPulse {
+    0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+    40% { opacity: 1; transform: scale(1); }
+  }
+
+  .ai-suggestions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ai-suggestion-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    background: var(--surface2);
+    border-radius: var(--radius-sm);
+    padding: 11px 12px;
+  }
+
+  .ai-suggestion-text {
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: var(--text-primary);
+    flex: 1;
+  }
+
+  .ai-add-btn {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    border: none;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s var(--spring);
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  .ai-add-btn:active { transform: scale(0.84); }
+
+  .ai-refresh-btn {
+    width: 100%;
+    margin-top: 10px;
+    background: transparent;
+    border: 1.5px solid var(--separator);
+    border-radius: var(--radius-sm);
+    padding: 9px;
+    font-family: var(--font);
+    font-size: 13px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.18s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .ai-refresh-btn:active { background: var(--surface2); }
+
   /* ── HAPTIC-like feedback ── */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
@@ -988,6 +1154,112 @@ function useTouchSort(items, setItems) {
 }
 
 // ─── MAIN APP ─────────────────────────────────────────────────
+
+// ─── ACCORDION ───────────────────────────────────────────────
+function Accordion({ icon, title, badge, children, defaultOpen = false }) {
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+    <div className="accordion">
+      <div className="accordion-header" onClick={() => setOpen(o => !o)}>
+        <div className="accordion-header-left">
+          <span className="accordion-icon">{icon}</span>
+          <span className="accordion-title">{title}</span>
+          {badge != null && <span className="accordion-badge">{badge}</span>}
+        </div>
+        <svg
+          className={`accordion-chevron ${open ? "open" : ""}`}
+          width="16" height="16" viewBox="0 0 16 16" fill="none"
+        >
+          <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </div>
+      <div className={`accordion-body ${open ? "open" : ""}`}>
+        <div className="accordion-inner">
+          <div className="accordion-content">{children}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── AI SUGGESTIONS ──────────────────────────────────────────
+function AISuggestions({ tasks, onAddTask }) {
+  const [suggestions, setSuggestions] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const fetchSuggestions = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    setSuggestions([]);
+    try {
+      const taskSummary = tasks
+        .filter(t => !t.completed)
+        .slice(0, 10)
+        .map(t => `・${t.title}${t.endDate ? `（期限: ${t.endDate}）` : ""}`)
+        .join("\n") || "タスクなし";
+
+      const res = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: `あなたはタスク管理のアシスタントです。ユーザーの現在のタスクリストを見て、追加すると良さそうなタスクを3件提案してください。
+以下のJSON形式のみで返答してください（マークダウン不要）：
+{"suggestions": ["タスク名1", "タスク名2", "タスク名3"]}
+・各タスクは15文字以内で簡潔に
+・現在のタスクと重複しない
+・実用的で具体的な内容`,
+          messages: [{
+            role: "user",
+            content: `現在のタスク:\n${taskSummary}\n\n追加すべきタスクを3件提案してください。`
+          }]
+        })
+      });
+      const data = await res.json();
+      const text = data.content?.find(b => b.type === "text")?.text || "{}";
+      const parsed = JSON.parse(text.replace(/```json|```/g, "").trim());
+      setSuggestions(parsed.suggestions || []);
+    } catch (e) {
+      setError("提案の取得に失敗しました");
+    } finally {
+      setLoading(false);
+    }
+  }, [tasks]);
+
+  useEffect(() => { fetchSuggestions(); }, []);
+
+  return (
+    <div className="ai-suggestions">
+      {loading && (
+        <div className="ai-loading">
+          <div className="ai-dots">
+            <span/><span/><span/>
+          </div>
+          AIが提案を考えています...
+        </div>
+      )}
+      {error && <div style={{fontSize:13, color:"var(--red)"}}>{error}</div>}
+      {suggestions.map((s, i) => (
+        <div key={i} className="ai-suggestion-item">
+          <span className="ai-suggestion-text">{s}</span>
+          <button
+            className="ai-add-btn"
+            onClick={() => onAddTask(s)}
+            title="タスクに追加"
+          >＋</button>
+        </div>
+      ))}
+      {!loading && (
+        <button className="ai-refresh-btn" onClick={fetchSuggestions}>
+          🔄 再提案
+        </button>
+      )}
+    </div>
+  );
+}
+
 const FILTERS = [
   { key: "all", label: "すべて" },
   { key: "active", label: "未完了" },
@@ -1026,6 +1298,19 @@ export default function App() {
       title: data.title,
       startDate: data.startDate,
       endDate: data.endDate,
+      completed: false,
+      completedDate: null,
+      createdAt: today(),
+    };
+    setTasks(prev => [newTask, ...prev]);
+  };
+
+  const handleAddFromAI = (title) => {
+    const newTask = {
+      id: generateId(),
+      title,
+      startDate: "",
+      endDate: "",
       completed: false,
       completedDate: null,
       createdAt: today(),
@@ -1124,6 +1409,13 @@ export default function App() {
               </>
             )}
           </div>
+        </div>
+
+        {/* AI Suggestions Accordion */}
+        <div style={{padding: "0 16px 8px"}}>
+          <Accordion icon="✨" title="AIタスク提案" badge="NEW">
+            <AISuggestions tasks={tasks} onAddTask={handleAddFromAI} />
+          </Accordion>
         </div>
 
         {/* FAB */}
